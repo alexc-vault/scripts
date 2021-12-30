@@ -1,0 +1,14 @@
+#!/bin/sh
+
+TOO="${1:-HEAD}"
+
+BRANCH=`git rev-parse --abbrev-ref $TOO`
+
+if [ $? -eq 0 ]
+then
+  echo "Pushing from master to $TOO"
+  git log --pretty=format:%H --reverse "master..$TOO" | xargs -I{} git push -f origin {}:"$BRANCH"
+else
+  echo "I dont think this is a git repo!"
+fi
+
