@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD 2>&1`
 
 if [ $? -eq 0 ]
 then

@@ -3,7 +3,7 @@
 FROM="${1:-master}"
 TOO="${2:-HEAD}"
 
-BRANCH=`git rev-parse --abbrev-ref $TOO`
+BRANCH=`git rev-parse --abbrev-ref $TOO 2>&1`
 
 if [ $FROM != 'master' ]
 then
