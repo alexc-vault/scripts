@@ -1,13 +1,19 @@
 #!/bin/sh
 
-TOO="${1:-HEAD}"
+FROM="${1:-master}"
+TOO="${2:-HEAD}"
 
 BRANCH=`git rev-parse --abbrev-ref $TOO`
 
+if [ $FROM != 'master' ]
+then
+  FROM="$FROM^"
+fi
+
 if [ $? -eq 0 ]
 then
-  echo "Pushing from master to $TOO"
-  git log --pretty=format:%H --reverse "master..$TOO" | xargs -I{} git push -f origin {}:"$BRANCH"
+  echo "Pushing from $FROM to $TOO"
+  git log --pretty=format:%H --reverse "$FROM..$TOO" | xargs -I{} git push -f origin {}:"$BRANCH"
 else
   echo "I dont think this is a git repo!"
 fi

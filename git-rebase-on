@@ -1,0 +1,15 @@
+#!/bin/sh
+
+TARGET_BRANCH="$1"
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+
+if [ $? -eq 0 ]
+then
+  git checkout "$TARGET_BRANCH"
+  git pull
+  git checkout "$CURRENT_BRANCH"
+  git rebase "$TARGET_BRANCH"
+else
+  echo "I dont think this is a git repo!"
+fi
+

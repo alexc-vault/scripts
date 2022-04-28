@@ -1,0 +1,13 @@
+#!/bin/sh
+
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+
+if [ $? -eq 0 ]
+then
+  git commit --amend --no-edit
+  git rebase --continue
+  git push -f
+else
+  echo "I dont think this is a git repo!"
+fi
+
