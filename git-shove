@@ -1,13 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD 2>&1`
+. is-git-repo.sh
 
-if [ $? -eq 0 ]
-then
-  git commit --amend --no-edit
-  git rebase --continue
-  git push -f
-else
-  echo "I dont think this is a git repo!"
-fi
-
+git commit --amend --no-edit
+git rebase --continue
+git push -f

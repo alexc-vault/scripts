@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+. is-git-repo.sh
 
 FROM="${1:-master}"
 TOO="${2:-HEAD}"
@@ -10,10 +12,5 @@ then
   FROM="$FROM^"
 fi
 
-if [ $? -eq 0 ]
-then
-  echo "Displaying from $FROM to $TOO"
-  git log --pretty=format:%H --reverse "$FROM..$TOO" | xargs -I{} echo git push -f origin {}:"$BRANCH"
-else
-  echo "I dont think this is a git repo!"
-fi
+echo "Displaying from $FROM to $TOO"
+git log --pretty=format:%H --reverse "$FROM..$TOO" | xargs -I{} echo git push -f origin {}:"$BRANCH"
